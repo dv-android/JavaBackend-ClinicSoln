@@ -29,6 +29,9 @@ repositories {
 					      url "https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2"
 					      url "https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson"
 					      url "https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple"
+					      //url "https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core"
+					      url "https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl"
+					      url "https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl"
 		 } 
 		 
 		 
@@ -63,6 +66,17 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+	//compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
+	
+	compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.13'
+	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+	
+	
+	
+	
 	
 	
 	
