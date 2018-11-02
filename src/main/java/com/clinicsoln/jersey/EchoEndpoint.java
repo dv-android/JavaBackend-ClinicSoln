@@ -4,6 +4,8 @@ package com.clinicsoln.jersey;
 
 
 //import javax.inject.Inject;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -48,17 +50,25 @@ import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 public class EchoEndpoint {
 	
 	private static final String filePath = "C:\\Users\\DEVANG\\eclipse-workspace\\ClinicSoln\\src\\main\\java\\com\\clinicsoln\\jersey\\dump.json";
+	
+	private ResultSet rs;
 
-    // ======================================
-    // =          Injection Points          =
-    // ======================================
+	
+	
+	@GET
+	@Path("getPatientDetail")
+	public Response getPatientDetail(@QueryParam("patient_id") String patient_id) throws IOException,SQLException,Exception{
+	 
+	 rs = DBConnection.getPatient("Ravi");
+	 while (rs.next()) {
+			System.out.println(rs.getString(1) + rs.getString(2) + rs.getString(3));
+			
+		}
+		
+	 return Response.ok().entity("gfdgfdg").type(MediaType.APPLICATION_JSON).build();
 
-    //@Inject
-    //private Logger logger;
-
-    // ======================================
-    // =          Business methods          =
-    // ======================================
+	
+	} 
 
     @GET
     @JWTTokenNeeded

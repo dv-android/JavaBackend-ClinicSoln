@@ -32,6 +32,7 @@ repositories {
 					      //url "https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core"
 					      url "https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl"
 					      url "https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl"
+					      url "https://mvnrepository.com/artifact/mysql/mysql-connector-java"
 		 } 
 		 
 		 
@@ -73,6 +74,10 @@ dependencies {
 	compile group: 'org.codehaus.jackson', name: 'jackson-core-asl', version: '1.9.13'
 	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
 	compile group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+	
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+	
 	
 	
 	
