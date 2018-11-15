@@ -72,7 +72,7 @@ public class EchoEndpoint {
 
     @GET
     @JWTTokenNeeded
-    public Response echo(@QueryParam("message") String message) {
+    public Response echo(@QueryParam("message") String message)  {
     	
     	 final Map<Integer, String> people  = new HashMap<>();
          people.put(1, "Michael");
@@ -80,7 +80,7 @@ public class EchoEndpoint {
          
          StreamingOutput stream = new StreamingOutput() {
              @Override
-             public void write(OutputStream os) throws IOException, WebApplicationException
+             public void write(OutputStream os) throws IOException, WebApplicationException 
              {
             	 JsonFactory jsonfactory = new JsonFactory(); 
             	// File jsonDoc = new File(path);
@@ -88,23 +88,71 @@ public class EchoEndpoint {
 
             	// Read more: https://javarevisited.blogspot.com/2015/03/parsing-large-json-files-using-jackson.html#ixzz5VciDvoEr
             	 
-            	 
-                 JsonGenerator jg = jsonfactory.createJsonGenerator( os, JsonEncoding.UTF8 );
-                 jg.writeStartArray();
+            	 try {
+            		 
+		            		 JsonGenerator jg = jsonfactory.createJsonGenerator( os, JsonEncoding.UTF8 );
+		                     jg.writeStartArray();
+			            	 rs = DBConnection.getPatient("Ravi");
+			            	 while (rs.next()) {
+			            			System.out.println(rs.getString(1) + rs.getString(2) + rs.getString(3));
+			            			jg.writeStartObject();
+			                        jg.writeFieldName( "patient_id" );
+			                        jg.writeString(rs.getString(1));
+			                        jg.writeFieldName( "name" );
+			                        jg.writeString(rs.getString(2));
+			                        jg.writeFieldName( "mobile" );
+			                        jg.writeString(rs.getString(3));
+			                        jg.writeFieldName( "email" );
+			                        jg.writeString(rs.getString(4));
+			                        jg.writeFieldName( "aadhar_no" );
+			                        jg.writeString(rs.getString(5));
+			                        jg.writeFieldName( "address" );
+			                        jg.writeString(rs.getString(6));
+			                        jg.writeFieldName( "pincode" );
+			                        jg.writeString(rs.getString(7));
+			                        jg.writeFieldName( "weight" );
+			                        jg.writeString(rs.getString(8));
+			                        jg.writeFieldName( "age" );
+			                        jg.writeString(rs.getString(9));
+			                        jg.writeFieldName( "gender" );
+			                        jg.writeString(rs.getString(10));
+			                        jg.writeFieldName( "temprature" );
+			                        jg.writeString(rs.getString(11));
+			                        jg.writeFieldName( "low_bp" );
+			                        jg.writeString(rs.getString(12));
+			                        jg.writeFieldName( "high_bp" );
+			                        jg.writeString(rs.getString(13));
+			                        jg.writeFieldName( "symptoms" );
+			                        jg.writeString(rs.getString(14));
+			                        jg.writeFieldName( "consultant" );
+			                        jg.writeString(rs.getString(15));
+			                        jg.writeFieldName( "appointment_time" );
+			                        jg.writeString(rs.getString(16));
+			                        jg.writeFieldName( "visit_status" );
+			                        jg.writeString(rs.getString(17));
+			                        jg.writeFieldName( "doc_id" );
+			                        jg.writeString(rs.getString(18));
+			                        jg.writeEndObject();
+			            			
+			            		}
+			            	 
+			            	 jg.writeEndArray();
 
-                 for ( Map.Entry<Integer, String> person : people.entrySet()  )
-                 {
-                     jg.writeStartObject();
-                     jg.writeFieldName( "id" );
-                     jg.writeString( person.getKey().toString() );
-                     jg.writeFieldName( "name" );
-                     jg.writeString( person.getValue() );
-                     jg.writeEndObject();
-                 }
-                 jg.writeEndArray();
+			                 jg.flush();
+			                 jg.close();
 
-                 jg.flush();
-                 jg.close();
+            	 }
+            	 catch(SQLException e) {
+            		 
+            	 }
+            	 catch(IOException e) {
+            		 
+            	 }
+            	 catch(Exception e) {
+            		 
+            	 }
+                 
+
              }
          };
 
