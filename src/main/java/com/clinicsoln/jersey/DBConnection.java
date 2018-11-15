@@ -43,7 +43,7 @@ public class DBConnection {
 				
 			
 			stmt = dbConn.createStatement();
-			String query = "SELECT * FROM patient where patient_id = 121";
+			String query = "SELECT * FROM patient ";
 			
 			rs = stmt.executeQuery(query);
 			System.out.println("Inside getPatient Detail");
