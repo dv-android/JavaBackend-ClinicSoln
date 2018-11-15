@@ -73,28 +73,20 @@ public class EchoEndpoint {
     @GET
     @JWTTokenNeeded
     public Response echo(@QueryParam("message") String message)  {
-    	
-    	 final Map<Integer, String> people  = new HashMap<>();
-         people.put(1, "Michael");
-         people.put(2, "Mark");
-         
+    	        
          StreamingOutput stream = new StreamingOutput() {
              @Override
              public void write(OutputStream os) throws IOException, WebApplicationException 
              {
-            	 JsonFactory jsonfactory = new JsonFactory(); 
-            	// File jsonDoc = new File(path);
-            	// JsonGenerator generator = jsonfactory.createJsonGenerator(jsonDoc, JsonEncoding.UTF8);
-
-            	// Read more: https://javarevisited.blogspot.com/2015/03/parsing-large-json-files-using-jackson.html#ixzz5VciDvoEr
-            	 
+            	 JsonFactory jsonfactory = new JsonFactory();             	 
             	 try {
             		 
 		            		 JsonGenerator jg = jsonfactory.createJsonGenerator( os, JsonEncoding.UTF8 );
 		                     jg.writeStartArray();
 			            	 rs = DBConnection.getPatient("Ravi");
-			            	 while (rs.next()) {
-			            			System.out.println(rs.getString(1) + rs.getString(2) + rs.getString(3));
+			            	 			            	 
+			            	 
+			            	 while (rs.next()) {	            			
 			            			jg.writeStartObject();
 			                        jg.writeFieldName( "patient_id" );
 			                        jg.writeString(rs.getString(1));
@@ -140,7 +132,9 @@ public class EchoEndpoint {
 
 			                 jg.flush();
 			                 jg.close();
-
+			                 
+			                 DBConnection.closeAllConnection();			                 
+			                 
             	 }
             	 catch(SQLException e) {
             		 
