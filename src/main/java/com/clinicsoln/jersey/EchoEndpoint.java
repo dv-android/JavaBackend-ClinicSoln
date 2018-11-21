@@ -40,6 +40,10 @@ import org.json.simple.parser.ParseException;
 
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 
+import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.Result;
+import com.google.android.gcm.server.Sender;
+
 /**
  * @author Antonio Goncalves
  *         http://www.antoniogoncalves.org
@@ -57,6 +61,7 @@ public class EchoEndpoint {
 	
 	@GET
 	@Path("getPatientDetail")
+	
 	public Response getPatientDetail(@QueryParam("patient_id") String patient_id) throws IOException,SQLException,Exception{
 	 
 	 rs = DBConnection.getPatient("Ravi");
@@ -65,7 +70,7 @@ public class EchoEndpoint {
 			
 		}
 		
-	 return Response.ok().entity("gfdgfdg").type(MediaType.APPLICATION_JSON).build();
+	 return Response.ok().entity("gfdgfdg").type(TEXT_PLAIN).build();
 
 	
 	} 
@@ -152,6 +157,23 @@ public class EchoEndpoint {
 
 
          return Response.ok().entity( stream ).type( MediaType.APPLICATION_JSON ).build();
+    }
+    
+    @GET
+    @Path("pushNotification")
+    public Response pushNotifications() throws IOException {
+    	
+    	Result result = null;
+    	
+    	Sender sender = new Sender("AIzaSyAlSLKGD8qNX3eznOsifEz1ijZ_jTwzOSo");
+    	Message message = new Message.Builder().timeToLive(30)
+				.delayWhileIdle(true).addData("Message", "Jay Swami Narayan").build();
+    	
+    	result = sender.send(message, "fdsfdfsdfdsf", 1);
+    	
+    	
+    	return Response.ok().entity("gfdgfdg").type(TEXT_PLAIN).build();
+    	
     }
 
     @GET
