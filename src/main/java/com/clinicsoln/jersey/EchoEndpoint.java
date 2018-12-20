@@ -165,14 +165,14 @@ public class EchoEndpoint {
     	
     	Result result = null;
     	
-    	Sender sender = new Sender("AIzaSyAlSLKGD8qNX3eznOsifEz1ijZ_jTwzOSo");
+    	Sender sender = new Sender("AIzaSyCjF-_eyZIqdJjZ20QXyGUYfpzfwV0i25c");
     	Message message = new Message.Builder().timeToLive(30)
 				.delayWhileIdle(true).addData("Message", "Jay Swami Narayan").build();
     	
-    	result = sender.send(message, "fdsfdfsdfdsf", 1);
+    	result = sender.send(message, "APA91bFvEE7CMc7-E7j0S6JYwoXOFOANIno4EFcS87zSsFwiDy-5h6L9tRABy8hfTk0nHany3_3IUiCT09Dm40IHBE5BTJCPVc9jxnWQbezH9sJEgKXz8JU3Zy9sBaClsEAqgnJEtF-w", 1);
     	
-    	
-    	return Response.ok().entity("gfdgfdg").type(TEXT_PLAIN).build();
+    	System.out.println("PushNotification Result is "+result);
+    	return Response.ok().entity("Jay Swami Narayan").type(TEXT_PLAIN).build();
     	
     }
 
